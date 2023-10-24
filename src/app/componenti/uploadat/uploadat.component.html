@@ -5,7 +5,7 @@
     </div>
     <div class="select-container">
       <mat-form-field>
-        <mat-label>Seleziona anno Accademico</mat-label>
+        <mat-label>Seleziona tipo Upload</mat-label>
         <mat-select (selectionChange)="cambioSel($event.value)">
           <mat-option value="ATT">Upload Attività</mat-option>
           <mat-option value="ISCR">Upload Iscritti</mat-option>
@@ -14,8 +14,21 @@
     </div>
     <div class="upload">
       <div class="attivita" *ngIf="visualizza == 'ATT'">
-        <input type="text" id="text" (change)="cambio($event)" placeholder="Nome attività" />
+        <input
+          type="text"
+          id="text"
+          (change)="cambio($event)"
+          placeholder="Nome attività"
+        />
         <input type="file" accept=".xlsx" (change)="onChangeFile($event)" />
+        <mat-form-field>
+          <mat-label class="anno-acc">Seleziona anno accademico</mat-label>
+          <mat-select (selectionChange)="cambioAnno($event.value)">
+            <mat-option *ngFor="let a of anni" [value]="a.value">
+              {{a.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <button (click)="onClick()">Carica!</button>
       </div>
       <div class="iscritt" *ngIf="visualizza == 'ISCR'">
@@ -27,11 +40,11 @@
   <div class="image-container">
     <div class="img-att" *ngIf="visualizza == 'ATT'">
       <h3>Esempio formattazione file attività</h3>
-      <img src="assets/immagini/esempio_att.png" >
+      <img src="assets/immagini/esempio_att.png" />
     </div>
     <div class="img-iscr" *ngIf="visualizza == 'ISCR'">
-      <h3>Esempio formattazione iscritti</h3>
-      <img src="assets/immagini/esempio_iscr.png">
+      <h3>Esempio formattazione file iscritti</h3>
+      <img src="assets/immagini/esempio_iscr.png" />
     </div>
   </div>
 </div>
